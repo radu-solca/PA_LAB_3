@@ -69,12 +69,14 @@ public class LabyrinthMatrixImpl implements Labyrinth {
 
     @Override
     public boolean isFreeAt(Cell cell) {
-        return cell.type == 0 || cell.type == -1 || cell.type == 2;
+        Cell requestedCell = labyrinth.get(cell.row).get(cell.column);
+        return requestedCell.type == 0 || requestedCell.type == -1 || requestedCell.type == 2;
     }
 
     @Override
     public boolean isWallAt(Cell cell) {
-        return cell.type == 1;
+        Cell requestedCell = labyrinth.get(cell.row).get(cell.column);
+        return requestedCell.type == 1;
     }
 
     @Override
