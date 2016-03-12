@@ -5,6 +5,8 @@
  */
 package pa_lab_3;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
+
 /**
  *
  * @author Radu
@@ -20,9 +22,28 @@ public class Cell {
         this.type = type;
     }
     
+    public Cell(int row, int column) {
+        this(row, column, 0);
+    }
+    
     @Override
     public String toString(){
         //return Integer.toString(row) + ' ' + Integer.toString(column) + ' ' + Integer.toString(type);
         return Integer.toString(type);
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null) return false;
+        else if (!(obj instanceof Cell)) return false;
+        else return ((this.row == ((Cell)obj).row)&&(this.column == ((Cell)obj).column));
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + this.row;
+        hash = 97 * hash + this.column;
+        return hash;
     }
 }
