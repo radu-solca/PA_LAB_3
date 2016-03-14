@@ -15,6 +15,8 @@ public interface Labyrinth {
     int getColumnCount();
     boolean isFreeAt(Cell cell);
     boolean isWallAt(Cell cell);
+    boolean isStartCell(Cell cell);
+    boolean isFinishCell(Cell cell);
     Cell getStartCell();
     Cell getFinishCell();
     

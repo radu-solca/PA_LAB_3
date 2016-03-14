@@ -5,6 +5,8 @@
  */
 package pa_lab_3;
 
+import java.util.List;
+
 /**
  *
  * @author NASA
@@ -24,9 +26,19 @@ public interface LabyrinthSolver {
     void setLabyrinth(Labyrinth labyrinth);
     
     /**
-     *
+     * 
+     * @return  List of characters representing the path from startCell to finishCell if on is found.
+     *          Possible characters are: D - down U - up L - left and R - right.
+     *          If a path is not found it returns null.
      */
-    void nextCellToExplore();
+    List<Character> solve();
     
-    void notifyObservers();
+    /**
+     * 
+     * @param command   Where to go in the labyrinth: UP DOWN LEFT RIGHT;
+     * @return          List of characters representing the path from startCell to finishCell if on is found.
+     *                  Possible characters are: D - down U - up L - left and R - right.
+     *                  If a path is not found it returns null.
+     */
+    List<Character> nextCellToExplore(String command);
 }

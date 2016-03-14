@@ -78,6 +78,16 @@ public class LabyrinthMatrixImpl implements Labyrinth {
         Cell requestedCell = labyrinth.get(cell.row).get(cell.column);
         return requestedCell.type == 1;
     }
+    
+    @Override
+    public boolean isStartCell(Cell cell) {
+       return startCell.equals(cell);
+    }
+
+    @Override
+    public boolean isFinishCell(Cell cell) {
+        return endCell.equals(cell);
+    }
 
     @Override
     public Cell getStartCell() {
@@ -91,7 +101,6 @@ public class LabyrinthMatrixImpl implements Labyrinth {
         return cell;
     }
     
-        
     @Override
     public String toString(){
         String string = "";

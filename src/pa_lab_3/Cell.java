@@ -5,8 +5,6 @@
  */
 package pa_lab_3;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-
 /**
  *
  * @author Radu

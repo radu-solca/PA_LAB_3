@@ -79,6 +79,16 @@ public class LabyrinthListImpl implements Labyrinth {
     public boolean isWallAt(Cell cell) {
         return filledCells.contains(cell);
     }
+    
+    @Override
+    public boolean isStartCell(Cell cell) {
+       return startCell.equals(cell);
+    }
+
+    @Override
+    public boolean isFinishCell(Cell cell) {
+        return endCell.equals(cell);
+    }
 
     @Override
     public Cell getStartCell() {
@@ -117,4 +127,6 @@ public class LabyrinthListImpl implements Labyrinth {
         }
         return string;
     }
+
+
 }

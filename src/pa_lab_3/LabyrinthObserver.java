@@ -11,4 +11,5 @@ package pa_lab_3;
  */
 public interface LabyrinthObserver {
     
+    public void update(LabyrinthSolver subject);
 }
