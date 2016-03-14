@@ -21,7 +21,7 @@ public class PA_LAB_3 {
         Labyrinth lab = new LabyrinthMatrixImpl(5, 5, gigi);
         Labyrinth lab2 = new LabyrinthListImpl(5, 5, gigi);
 
-        LabyrinthSolver solver = new LabyrinthInteractiveSolver(lab);
+        LabyrinthSolver solver = new LabyrinthAutomatedSolver(lab);
         
         solver.solve();
 

@@ -5,7 +5,7 @@
  */
 package pa_lab_3;
 
-import java.util.List;
+import java.util.Stack;
 
 /**
  *
@@ -25,13 +25,9 @@ public interface LabyrinthSolver {
      */
     void setLabyrinth(Labyrinth labyrinth);
     
-    /**
-     * 
-     */
-    void solve();
+    boolean foundSolution();
+    Stack<Character> getCurrentPath();
     
-    /**
-     * 
-     */
+    void solve();
     void nextCellToExplore();
 }

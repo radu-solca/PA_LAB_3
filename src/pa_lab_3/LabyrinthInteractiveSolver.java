@@ -8,7 +8,6 @@ package pa_lab_3;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,15 +45,20 @@ public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
     }
 
     @Override
-    public void solve() {
-        
-        while(true){
+    public boolean foundSolution() {
+        return labyrinth.isFinishCell(currentCell);
+    }
 
+    @Override
+    public Stack<Character> getCurrentPath() {
+        return solutionStack;
+    }
+    
+    @Override
+    public void solve() {
+        while(true){
             this.nextCellToExplore();
             if (labyrinth.isFinishCell(currentCell)){ 
-                break;
-            }
-            else{
                 break;
             }
         }
@@ -66,6 +70,47 @@ public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
         if(cell.column < 0 || cell.column >= labyrinth.getColumnCount())
             return false;
         return !labyrinth.isWallAt(cell);
+    }
+    
+    private boolean goUp(){
+        Cell newCell = new Cell(currentCell.row - 1, currentCell.column);
+        if(isValidMove(newCell)){
+            currentCell = newCell;
+            solutionStack.add('U');
+            return true;
+        }
+        System.out.println("Invalid move");
+        return false;
+    }
+    private boolean goDown(){
+        Cell newCell = new Cell(currentCell.row + 1, currentCell.column);
+        if(isValidMove(newCell)){
+            currentCell = newCell;
+            solutionStack.add('D');
+            return true;
+        }
+        System.out.println("Invalid move");
+        return false;
+    }
+    private boolean goLeft(){
+        Cell newCell = new Cell(currentCell.row, currentCell.column - 1);
+        if(isValidMove(newCell)){
+            currentCell = newCell;
+            solutionStack.add('L');
+            return true;
+        }
+        System.out.println("Invalid move");
+        return false;
+    }
+    private boolean goRight(){
+        Cell newCell = new Cell(currentCell.row, currentCell.column + 1);
+        if(isValidMove(newCell)){
+            currentCell = newCell;
+            solutionStack.add('R');
+            return true;
+        }
+        System.out.println("Invalid move");
+        return false;
     }
     
     @Override
@@ -80,51 +125,22 @@ public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
         } catch (IOException ex) {
             Logger.getLogger(LabyrinthInteractiveSolver.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        Cell newCell;
+        
         switch(input){
             case "UP":
-                newCell = new Cell(currentCell.row - 1, currentCell.column);
-                if(isValidMove(newCell)){
-                    currentCell = newCell;
-                    solutionStack.add('U');
-                }
-                else{
-                    System.out.println("Invalid move");
-                }
+                goUp();
                 break;
             case "DOWN":
-                newCell = new Cell(currentCell.row + 1, currentCell.column);
-                if(isValidMove(newCell)){
-                    currentCell = newCell;
-                    solutionStack.add('D');
-                }
-                else{
-                    System.out.println("Invalid move");
-                }
+                goDown();
                 break;
             case "LEFT":
-                newCell = new Cell(currentCell.row, currentCell.column - 1);
-                if(isValidMove(newCell)){
-                    currentCell = newCell;
-                    solutionStack.add('L');
-                }
-                else{
-                    System.out.println("Invalid move");
-                }
+                goLeft();
                 break;
             case "RIGHT":
-                newCell = new Cell(currentCell.row, currentCell.column + 1);
-                if(isValidMove(newCell)){
-                    currentCell = newCell;
-                    solutionStack.add('R');
-                }
-                else{
-                    System.out.println("Invalid move");
-                }
+                goRight();
                 break;
             default:
-                System.out.println("Unknown command: try UP, DOWN, LEFT, RIGHT, or EXIT to quit.");
+                System.out.println("Unknown command: try UP, DOWN, LEFT or RIGHT.");
         }
         
         this.notifyObservers();
