@@ -30,22 +30,35 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
     
     @Override
     public Labyrinth getLabyrinth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.labyrinth;
     }
 
     @Override
     public void setLabyrinth(Labyrinth labyrinth) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        solutionStack.removeAllElements();
+        this.labyrinth = labyrinth;
+        this.currentCell = this.labyrinth.getStartCell();
     }
 
     @Override
-    public List<Character> solve() {
+    public void solve() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    private boolean isValidMove(Cell cell){
+        if(cell.row < 0 || cell.row >= labyrinth.getRowCount())
+            return false;
+        if(cell.column < 0 || cell.column >= labyrinth.getColumnCount())
+            return false;
+        return !labyrinth.isWallAt(cell);
+    }
+    
     @Override
-    public List<Character> nextCellToExplore(String command) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void nextCellToExplore() {
+        
+        
+        
+        this.notifyObservers();
     }
     
 }

@@ -46,29 +46,18 @@ public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
     }
 
     @Override
-    public List<Character> solve() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+    public void solve() {
+        
         while(true){
-            
-            System.out.print("> ");
-            String input = "";
-            try {
-                input = reader.readLine();
-            } catch (IOException ex) {
-                Logger.getLogger(LabyrinthInteractiveSolver.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(!input.equals("EXIT")){
-                this.nextCellToExplore(input);
-                if (labyrinth.isFinishCell(currentCell)){ 
-                    break;
-                }
+
+            this.nextCellToExplore();
+            if (labyrinth.isFinishCell(currentCell)){ 
+                break;
             }
             else{
                 break;
             }
         }
-        return labyrinth.isStartCell(currentCell) ? solutionStack : null;
     }
     
     private boolean isValidMove(Cell cell){
@@ -80,9 +69,20 @@ public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
     }
     
     @Override
-    public List<Character> nextCellToExplore(String command){
+    public void nextCellToExplore(){
+        
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        
+        System.out.print("> ");
+        String input = "";
+        try {
+            input = reader.readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(LabyrinthInteractiveSolver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
         Cell newCell;
-        switch(command){
+        switch(input){
             case "UP":
                 newCell = new Cell(currentCell.row - 1, currentCell.column);
                 if(isValidMove(newCell)){
@@ -128,6 +128,5 @@ public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
         }
         
         this.notifyObservers();
-        return labyrinth.isStartCell(currentCell) ? solutionStack : null;
     }
 }

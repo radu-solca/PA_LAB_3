@@ -27,18 +27,11 @@ public interface LabyrinthSolver {
     
     /**
      * 
-     * @return  List of characters representing the path from startCell to finishCell if on is found.
-     *          Possible characters are: D - down U - up L - left and R - right.
-     *          If a path is not found it returns null.
      */
-    List<Character> solve();
+    void solve();
     
     /**
      * 
-     * @param command   Where to go in the labyrinth: UP DOWN LEFT RIGHT;
-     * @return          List of characters representing the path from startCell to finishCell if on is found.
-     *                  Possible characters are: D - down U - up L - left and R - right.
-     *                  If a path is not found it returns null.
      */
-    List<Character> nextCellToExplore(String command);
+    void nextCellToExplore();
 }
