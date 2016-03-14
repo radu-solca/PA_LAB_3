@@ -16,14 +16,24 @@ public class PA_LAB_3 {
      */
     public static void main(String[] args){
         
-        int[][] gigi = {{-1, 1, 1, 1, 1}, {0, 0, 1, 1, 1}, {1, 0, 1, 1, 1}, {1, 0, 0, 1, 1}, {1, 1, 2, 1, 1}};
+        int[][] gigi = {{-1, 1, 1, 0, 1}, 
+                        {0, 0, 0, 0, 1}, 
+                        {0, 1, 1, 0, 0}, 
+                        {1, 0, 0, 0, 1}, 
+                        {1, 1, 2, 1, 1}};
         
         Labyrinth lab = new LabyrinthMatrixImpl(5, 5, gigi);
-        Labyrinth lab2 = new LabyrinthListImpl(5, 5, gigi);
 
         LabyrinthSolver solver = new LabyrinthAutomatedSolver(lab);
+        LabyrinthObserver observer = new LabyrinthPrinterObserver();
+        LabyrinthView view = new LabyrinthViewBlocks();
+        
+        view.setLabyrinth(lab);
+        view.drawLabyrinth();
+        ((LabyrinthObservableSolver)solver).addObserver(observer);
         
         solver.solve();
+        //System.out.println(lab.isWallAt(new Cell(1,1)));
 
     }
     

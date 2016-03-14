@@ -27,7 +27,7 @@ public class Cell {
     @Override
     public String toString(){
         //return Integer.toString(row) + ' ' + Integer.toString(column) + ' ' + Integer.toString(type);
-        return Integer.toString(type);
+        return Integer.toString(row) + ' ' + Integer.toString(column);
     }
     
     @Override

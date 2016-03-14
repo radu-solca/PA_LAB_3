@@ -5,9 +5,7 @@
  */
 package pa_lab_3;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
@@ -25,6 +23,7 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
     public LabyrinthAutomatedSolver() {
         solutionStack = new Stack<>();
         visited = new HashSet<>();
+        
     }
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -41,8 +40,11 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
     @Override
     public void setLabyrinth(Labyrinth labyrinth) {
         solutionStack.removeAllElements();
+        visited.clear();
         this.labyrinth = labyrinth;
         this.currentCell = this.labyrinth.getStartCell();
+        visited.add(currentCell);
+        
     }
 
     @Override
@@ -71,8 +73,9 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
             return false;
         if(cell.column < 0 || cell.column >= labyrinth.getColumnCount())
             return false;
-        if(labyrinth.isWallAt(cell))
+        if(labyrinth.isWallAt(cell)){
             return false;
+        }
         return !visited.contains(cell);
     }
     
@@ -82,7 +85,6 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
             currentCell = newCell;
             visited.add(currentCell);
             solutionStack.add('U');
-            System.out.println('U');
             return true;
         }
         return false;
@@ -93,7 +95,6 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
             currentCell = newCell;
             visited.add(currentCell);
             solutionStack.add('D');
-            System.out.println('D');
             return true;
         }
         return false;
@@ -104,7 +105,6 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
             currentCell = newCell;
             visited.add(currentCell);
             solutionStack.add('L');
-            System.out.println('L');
             return true;
         }
         return false;
@@ -115,24 +115,42 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
             currentCell = newCell;
             visited.add(currentCell);
             solutionStack.add('R');
-            System.out.println('R');
             return true;
         }
         return false;
     }
+    
+    private void foreceGoUp(){
+        Cell newCell = new Cell(currentCell.row - 1, currentCell.column);
+        currentCell = newCell;
+    }
+    private void foreceGoDown(){
+        Cell newCell = new Cell(currentCell.row + 1, currentCell.column);
+        currentCell = newCell;
+    }
+    private void foreceGoLeft(){
+        Cell newCell = new Cell(currentCell.row, currentCell.column - 1);
+        currentCell = newCell;
+    }
+    private void foreceGoRight(){
+        Cell newCell = new Cell(currentCell.row, currentCell.column + 1);
+        currentCell = newCell;
+    }
+    
     private boolean goBack(){
         if(!solutionStack.empty()){
             switch(solutionStack.pop()){
                 case 'D':
-                    goUp(); break;
+                    foreceGoUp(); break;
                 case 'U':
-                    goDown(); break;
+                    foreceGoDown(); break;
                 case 'L':
-                    goRight(); break;
+                    foreceGoRight(); break;
                 case 'R':
-                    goLeft(); break;
+                    foreceGoLeft(); break;
+                default:
+                    System.out.println("YOU FUCKED UP NIGGA");
             }
-            System.out.println('B');
             return true;
         }
         else return false;
@@ -146,6 +164,7 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
                 if(!goUp())
                     if(!goLeft())
                         goBack();
+        
         
         this.notifyObservers();
     }
