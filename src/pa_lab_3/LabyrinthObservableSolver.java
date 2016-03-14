@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author NASA
  */
-public abstract class LabyrinthSolverObservable implements LabyrinthSolver {
+public abstract class LabyrinthObservableSolver implements LabyrinthSolver {
     
     private final List<LabyrinthObserver> observers;
 
-    public LabyrinthSolverObservable() {
+    public LabyrinthObservableSolver() {
         observers = new ArrayList<>();
     }
 

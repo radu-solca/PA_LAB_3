@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author NASA
  */
-public class LabyrinthInteractiveSolver extends LabyrinthSolverObservable{
+public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
 
     private Labyrinth labyrinth;
     private final Stack<Character> solutionStack;
