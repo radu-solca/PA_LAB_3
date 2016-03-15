@@ -40,6 +40,7 @@ public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
     @Override
     public void setLabyrinth(Labyrinth labyrinth) {
         solutionStack.removeAllElements();
+        solutionStack.add('S');
         this.labyrinth = labyrinth;
         this.currentCell = this.labyrinth.getStartCell();
     }
@@ -127,20 +128,20 @@ public class LabyrinthInteractiveSolver extends LabyrinthObservableSolver{
         }
         
         switch(input){
-            case "UP":
+            case "U":
                 goUp();
                 break;
-            case "DOWN":
+            case "D":
                 goDown();
                 break;
-            case "LEFT":
+            case "L":
                 goLeft();
                 break;
-            case "RIGHT":
+            case "R":
                 goRight();
                 break;
             default:
-                System.out.println("Unknown command: try UP, DOWN, LEFT or RIGHT.");
+                System.out.println("Unknown command: try D U L R.");
         }
         
         this.notifyObservers();

@@ -15,7 +15,7 @@ public class LabyrinthPrinterObserver implements LabyrinthObserver{
     
     @Override
     public void update(LabyrinthSolver subject) {
-        System.out.println(subject.getCurrentPath());
+        System.out.println("(printer)"+subject.getCurrentPath());
     }
     
 }

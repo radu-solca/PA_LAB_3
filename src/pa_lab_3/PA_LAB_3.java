@@ -16,24 +16,37 @@ public class PA_LAB_3 {
      */
     public static void main(String[] args){
         
-        int[][] gigi = {{-1, 1, 1, 0, 1}, 
+        int[][] input = {{-1, 1, 1, 0, 1}, 
                         {0, 0, 0, 0, 1}, 
-                        {0, 1, 1, 0, 0}, 
+                        {1, 0, 1, 0, 0}, 
                         {1, 0, 0, 0, 1}, 
                         {1, 1, 2, 1, 1}};
         
-        Labyrinth lab = new LabyrinthMatrixImpl(5, 5, gigi);
+        Labyrinth labyrinth = new LabyrinthMatrixImpl(5, 5, input);
 
-        LabyrinthSolver solver = new LabyrinthAutomatedSolver(lab);
-        LabyrinthObserver observer = new LabyrinthPrinterObserver();
+        LabyrinthSolver solver1 = new LabyrinthAutomatedSolver(labyrinth);
+        LabyrinthSolver solver2 = new LabyrinthInteractiveSolver(labyrinth);
+        
+        LabyrinthObserver observer1 = new LabyrinthPrinterObserver();
+        LabyrinthObserver observer2 = new LabyrinthRecorderObserver();
+        
         LabyrinthView view = new LabyrinthViewBlocks();
         
-        view.setLabyrinth(lab);
+        view.setLabyrinth(labyrinth);
         view.drawLabyrinth();
-        ((LabyrinthObservableSolver)solver).addObserver(observer);
         
-        solver.solve();
-        //System.out.println(lab.isWallAt(new Cell(1,1)));
+        ((LabyrinthObservableSolver)solver1).addObserver(observer1);
+        ((LabyrinthObservableSolver)solver1).addObserver(observer2);
+        
+        ((LabyrinthObservableSolver)solver2).addObserver(observer1);
+        ((LabyrinthObservableSolver)solver2).addObserver(observer2);
+        
+        solver1.solve();
+        
+        //other solution is [S, D, R, R, R, D, D, L, D];
+        solver2.solve();
+        
+        System.out.println(observer2);
 
     }
     

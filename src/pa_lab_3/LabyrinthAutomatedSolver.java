@@ -40,6 +40,7 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
     @Override
     public void setLabyrinth(Labyrinth labyrinth) {
         solutionStack.removeAllElements();
+        solutionStack.add('S');
         visited.clear();
         this.labyrinth = labyrinth;
         this.currentCell = this.labyrinth.getStartCell();
@@ -61,7 +62,7 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
     public void solve() {
         while(true){
             nextCellToExplore();
-            if(visited.size() == labyrinth.getColumnCount()*labyrinth.getRowCount())
+            if(solutionStack.empty())
                 break;
             if(labyrinth.isFinishCell(currentCell))
                 break;
@@ -148,8 +149,6 @@ public class LabyrinthAutomatedSolver extends LabyrinthObservableSolver{
                     foreceGoRight(); break;
                 case 'R':
                     foreceGoLeft(); break;
-                default:
-                    System.out.println("YOU FUCKED UP NIGGA");
             }
             return true;
         }
